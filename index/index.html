@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>دليل فارسكور</title>
+<style>
+* {margin:0;padding:0;box-sizing:border-box;font-family:'Tahoma',sans-serif;}
+body {background:#f9f9f9;color:#333;transition:0.3s;}
+header {background:#0077b6;color:white;padding:15px;text-align:center;position:sticky;top:0;z-index:1000;transition:0.3s;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;}
+header h1 {font-size:1.5rem;margin-bottom:10px;}
+.top-controls {display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;}
+#searchInput {width:80%;max-width:300px;padding:10px;border:none;border-radius:8px;font-size:1rem;}
+#darkModeBtn {padding:10px;border:none;border-radius:8px;cursor:pointer;font-size:1rem;background:#ffb703;color:#000;transition:0.3s;}
+#darkModeBtn:hover {background:#ff9500;}
+#sectionFilter {padding:10px;border:none;border-radius:8px;font-size:1rem;background:#f1f1f1;cursor:pointer;}
+#mainNav {display:flex;flex-wrap:wrap;justify-content:center;background:#0096c7;padding:10px;transition:0.3s;}
+#mainNav a {color:white;text-decoration:none;margin:5px 10px;font-size:0.9rem;transition:0.3s;}
+#mainNav a:hover {text-decoration:underline;}
+#menuToggle {display:none;font-size:1.5rem;color:white;background:none;border:none;cursor:pointer;margin-top:10px;transition:0.3s;}
+@media(max-width:768px){
+  #mainNav {flex-direction:column;align-items:center;display:none;}
+  #mainNav.active {display:flex;}
+  #menuToggle {display:block;}
+}
+section {padding:40px 20px;transition:0.3s;}
+section h2 {margin-bottom:10px;font-size:1.3rem;color:#0077b6;text-align:center;transition:0.3s;}
+.card-count {text-align:center;font-size:0.9rem;color:#555;margin-bottom:15px;}
+.cards {display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px;transition:0.3s;}
+.card {background:white;padding:20px;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.1);transition:transform 0.3s,text-shadow 0.3s;text-align:center;cursor:pointer;position:relative;overflow:hidden;}
+.card:hover {transform:translateY(-5px) scale(1.02);text-shadow:0 0 5px rgba(0,0,0,0.2);}
+footer {background:#0077b6;color:white;text-align:center;padding:15px;margin-top:20px;transition:0.3s;}
+footer p {font-size:0.9rem;}
+html {scroll-behavior:smooth;}
+#backToTop {display:none;position:fixed;bottom:20px;left:20px;z-index:100; background:#ffb703;color:#000;border:none;border-radius:50%;padding:12px 16px;font-size:18px;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,0.3);transition:0.3s;opacity:0;transform:scale(0.8);}
+#backToTop.show {display:block;opacity:1;transform:scale(1);}
+#backToTop:hover {background:#ff9500;}
+body.dark {background:#121212;color:#f1f1f1;}
+body.dark header {background:#1d3557;}
+body.dark #mainNav {background:#457b9d;}
+body.dark #mainNav a {color:#f1f1f1;}
+body.dark section h2 {color:#a8dadc;}
+body.dark .card {background:#1e1e1e;color:#f1f1f1;box-shadow:0 2px 6px rgba(255,255,255,0.1);}
+body.dark footer {background:#1d3557;}
+body.dark #darkModeBtn {background:#222;color:#fff;}
+.highlight {background-color: yellow; color: black;}
+#modalOverlay {display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);justify-content:center;align-items:center;z-index:10000;transition:0.3s;}
+#modal {background:white;padding:20px;border-radius:12px;min-width:250px;max-width:90%;text-align:center;position:relative;transition:0.3s;}
+#modal p {margin-bottom:15px;word-break:break-word;}
+#modal button {padding:10px;border:none;border-radius:8px;background:#ffb703;color:#000;cursor:pointer;transition:0.3s;margin:5px;}
+#modal button:hover {background:#ff9500;}
+#modalClose {position:absolute;top:10px;right:10px;background:none;color:#333;font-size:18px;cursor:pointer;}
+body.dark #modal {background:#1e1e1e;color:#f1f1f1;}
+body.dark #modal button {background:#222;color:#fff;}
+body.dark #modalClose {color:#fff;}
+.share-btns {margin-top:10px;}
+.share-btns button {padding:5px 10px;border:none;border-radius:8px;cursor:pointer;background:#0077b6;color:white;transition:0.3s;margin:0 5px;}
+.share-btns button:hover {background:#0096c7;}
+#toast {position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#333;color:white;padding:10px 20px;border-radius:8px;opacity:0;transition:0.5s;z-index:20000;}
+#toast.show {opacity:1;}
+
+/* البروتفوليو */
+#portfolio {background:#ffb703;color:#000;padding:15px;border-radius:12px;display:flex;align-items:center;gap:15px;position:sticky;top:15px;z-index:1001;box-shadow:0 2px 6px rgba(0,0,0,0.2);}
+#portfolio img {width:100px;height:100px;border-radius:50%;border:3px solid #fff;object-fit:cover;}
+#portfolio .info {display:flex;flex-direction:column;}
+#portfolio .info span {margin:2px 0;}
+#portfolio .buttons {display:flex;gap:5px;margin-top:5px;}
+#portfolio .buttons button {padding:5px 8px;border:none;border-radius:6px;cursor:pointer;background:#0077b6;color:white;transition:0.3s;}
+#portfolio .buttons button:hover {background:#0096c7;}
+@media(max-width:768px){
+  #portfolio {flex-direction:column;align-items:center;}
+}
+</style>
+</head>
+<body>
+
+<header>
+<h1>📖 دليل فارسكور</h1>
+<div class="top-controls">
+  <select id="sectionFilter">
+    <option value="all">كل الأقسام</option>
+    <option value="clinics">عيادات</option>
+    <option value="teachers">مدرسين</option>
+    <option value="engineers">مهندسين</option>
+    <option value="doctors">أطباء</option>
+    <option value="craftsmen">حرفيين</option>
+    <option value="transport">وسائل مواصلات</option>
+    <option value="shops">محلات</option>
+    <option value="offices">مكاتب</option>
+  </select>
+  <input type="text" id="searchInput" placeholder="ابحث هنا...">
+  <button id="darkModeBtn">🌙</button>
+</div>
+<button id="menuToggle">☰ القائمة</button>
+</header>
+
+<!-- بروتفوليو ثابت -->
+<div id="portfolio">
+<img src="../img/info.jpg" alt="محمود جابر">
+<div class="info">
+<span><strong> مهندس - محمود جابر      </strong></span>
+<span>مهندس برمجيات</span>
+<span>عضو لجنة الإتصالات و تكنولوجيا المعلومات في مؤسسة مهندسون من أجل مصر</span>
+<span>01018813328</span>
+<div class="buttons">
+<button onclick="copyPortfolioNumber()">نسخ الرقم</button>
+<button onclick="sharePortfolioWhats()">واتساب</button>
+<button onclick="sharePortfolioFB()">فيسبوك</button>
+</div>
+</div>
+</div>
+
+<nav id="mainNav">
+<a href="#clinics">عيادات</a>
+<a href="#teachers">مدرسين</a>
+<a href="#engineers">مهندسين</a>
+<a href="#doctors">أطباء</a>
+<a href="#craftsmen">حرفيين</a>
+<a href="#transport">وسائل مواصلات</a>
+<a href="#shops">محلات</a>
+<a href="#offices">مكاتب</a>
+</nav>
+
+<!-- الأقسام -->
+<section id="clinics">
+<h2>🏥 عيادات</h2>
+<div class="internal-filter">
+  <label>فلترة حسب النوع: </label>
+  <select class="typeFilter">
+    <option value="all">كل الأنواع</option>
+    <option value="أسنان">أسنان</option>
+    <option value="أطفال">أطفال</option>
+  </select>
+</div>
+<div class="card-count"></div>
+<div class="cards">
+  <div class="card" data-type="أسنان">عيادة د. أحمد - أسنان - 01011111111</div>
+  <div class="card" data-type="أطفال">عيادة د. منى - أطفال - 01022222222</div>
+</div>
+</section>
+
+<section id="teachers">
+<h2>👨‍🏫 مدرسين</h2>
+<div class="internal-filter">
+  <label>فلترة حسب المادة: </label>
+  <select class="typeFilter">
+    <option value="all">كل المواد</option>
+    <option value="رياضيات">رياضيات</option>
+    <option value="لغة عربية">لغة عربية</option>
+  </select>
+</div>
+<div class="card-count"></div>
+<div class="cards">
+  <div class="card" data-type="رياضيات">أ/ خالد - رياضيات - 01033333333</div>
+  <div class="card" data-type="لغة عربية">أ/ سارة - لغة عربية - 01044444444</div>
+</div>
+</section>
+
+<section id="engineers">
+<h2>👷‍♂️ مهندسين</h2>
+<div class="internal-filter">
+  <label>فلترة حسب التخصص: </label>
+  <select class="typeFilter">
+    <option value="all">كل التخصصات</option>
+    <option value="برمجيات">برمجيات</option>
+    <option value="مدني">مدني</option>
+  </select>
+</div>
+<div class="card-count"></div>
+<div class="cards">
+  <div class="card" data-type="برمجيات">م/ محمود - برمجيات - 01055555555</div>
+  <div class="card" data-type="مدني">م/ علي - مدني - 01066666666</div>
+</div>
+</section>
+
+<section id="doctors">
+<h2>👨‍⚕️ أطباء</h2>
+<div class="internal-filter">
+  <label>فلترة حسب التخصص: </label>
+  <select class="typeFilter">
+    <option value="all">كل التخصصات</option>
+    <option value="باطنة">باطنة</option>
+    <option value="عيون">عيون</option>
+  </select>
+</div>
+<div class="card-count"></div>
+<div class="cards">
+  <div class="card" data-type="باطنة">د. سامي - باطنة - 01077777777</div>
+  <div class="card" data-type="عيون">د. هالة - عيون - 01088888888</div>
+</div>
+</section>
+
+<section id="craftsmen">
+<h2>🛠️ حرفيين</h2>
+<div class="internal-filter">
+  <label>فلترة حسب النوع: </label>
+  <select class="typeFilter">
+    <option value="all">كل الأنواع</option>
+    <option value="نجار">نجار</option>
+    <option value="سباك">سباك</option>
+  </select>
+</div>
+<div class="card-count"></div>
+<div class="cards">
+  <div class="card" data-type="نجار">نجار - عماد - 01099999999</div>
+  <div class="card" data-type="سباك">سباك - محمد - 01010101010</div>
+</div>
+</section>
+
+<section id="transport">
+<h2>🚖 وسائل مواصلات</h2>
+<div class="internal-filter">
+  <label>فلترة حسب النوع: </label>
+  <select class="typeFilter">
+    <option value="all">كل الأنواع</option>
+    <option value="تاكسي">تاكسي</option>
+    <option value="ميكروباص">ميكروباص</option>
+  </select>
+</div>
+<div class="card-count"></div>
+<div class="cards">
+  <div class="card" data-type="تاكسي">تاكسي - 01012345678</div>
+  <div class="card" data-type="ميكروباص">ميكروباص - خط دمياط - 01087654321</div>
+</div>
+</section>
+
+<section id="shops">
+<h2>🏬 محلات</h2>
+<div class="internal-filter">
+  <label>فلترة حسب النوع: </label>
+  <select class="typeFilter">
+    <option value="all">كل الأنواع</option>
+    <option value="ملابس">ملابس</option>
+    <option value="أدوات منزلية">أدوات منزلية</option>
+  </select>
+</div>
+<div class="card-count"></div>
+<div class="cards">
+  <div class="card" data-type="ملابس">محل أبو عمر - ملابس - 01012121212</div>
+  <div class="card" data-type="أدوات منزلية">محل الأمل - أدوات منزلية - 01013131313</div>
+</div>
+</section>
+
+<section id="offices">
+<h2>🏢 مكاتب</h2>
+<div class="internal-filter">
+  <label>فلترة حسب النوع: </label>
+  <select class="typeFilter">
+    <option value="all">كل الأنواع</option>
+    <option value="محاماة">محاماة</option>
+    <option value="مقاولات">مقاولات</option>
+  </select>
+</div>
+<div class="card-count"></div>
+<div class="cards">
+  <div class="card" data-type="محاماة">مكتب محاماة - المستشار محمود - 01014141414</div>
+  <div class="card" data-type="مقاولات">مكتب مقاولات - شركة البناء - 01015151515</div>
+</div>
+</section>
+
+<footer>
+<p>جميع الحقوق محفوظة &copy; مهندس - محمود جابر</p>
+</footer>
+
+<button id="backToTop">⬆</button>
+<div id="toast"></div>
+
+<div id="modalOverlay">
+<div id="modal">
+<button id="modalClose">✖</button>
+<p id="modalText"></p>
+<div class="share-btns">
+  <button id="modalCopy">نسخ الرقم</button>
+  <button id="shareWhatsApp">واتساب</button>
+  <button id="shareFacebook">فيسبوك</button>
+  <button id="callBtn">📞 اتصال</button>
+</div>
+</div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+const searchInput = document.getElementById('searchInput');
+const sectionFilter = document.getElementById('sectionFilter');
+const backToTop = document.getElementById('backToTop');
+const darkModeBtn = document.getElementById('darkModeBtn');
+const menuToggle = document.getElementById('menuToggle');
+const nav = document.getElementById('mainNav');
+const toast = document.getElementById('toast');
+
+const modalOverlay = document.getElementById('modalOverlay');
+const modal = document.getElementById('modal');
+const modalText = document.getElementById('modalText');
+const modalClose = document.getElementById('modalClose');
+const modalCopy = document.getElementById('modalCopy');
+const shareWhatsApp = document.getElementById('shareWhatsApp');
+const shareFacebook = document.getElementById('shareFacebook');
+const callBtn = document.getElementById('callBtn');
+
+const allCards = document.querySelectorAll('.card');
+
+// خزن النص الأصلي لكل كارت
+allCards.forEach(card=>{
+  card.dataset.original = card.textContent;
+});
+
+// فلتر داخلي لكل الأقسام
+document.querySelectorAll('.typeFilter').forEach(filter=>{
+  filter.addEventListener('change',()=>{
+    const val = filter.value;
+    const section = filter.closest('section');
+    section.querySelectorAll('.card').forEach(card=>{
+      const original = card.dataset.original;
+      card.textContent = original;
+      card.style.display = (val==='all' || card.dataset.type===val) ? '' : 'none';
+    });
+    updateCardCounts();
+  });
+});
+
+// تحديث عداد الكروت
+function updateCardCounts(){
+  document.querySelectorAll('section').forEach(sec=>{
+    const count=sec.querySelectorAll('.card:not([style*="display: none"])').length;
+    sec.querySelector('.card-count').textContent=`عدد النتائج: ${count}`;
+  });
+}
+updateCardCounts();
+
+// escape regex
+function escapeRegExp(string){return string.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
+
+// البحث مع هايلايت
+searchInput.addEventListener('input',()=>{
+  const val = searchInput.value.trim();
+  const reg = new RegExp(escapeRegExp(val),'gi');
+  allCards.forEach(card=>{
+    const originalText = card.dataset.original;
+    if(originalText.match(reg)){
+      card.style.display='';
+      card.innerHTML=originalText.replace(reg, match=>`<span class="highlight">${match}</span>`);
+    } else {
+      card.style.display='none';
+      card.innerHTML=originalText;
+    }
+  });
+  updateCardCounts();
+});
+
+// فلترة الأقسام الرئيسية
+sectionFilter.addEventListener('change',()=>{
+  const val = sectionFilter.value;
+  document.querySelectorAll('section').forEach(sec=>{
+    sec.style.display = (val==='all'||sec.id===val)?'':'none';
+  });
+});
+
+// زرار لأعلى
+window.addEventListener('scroll',()=>{
+  if(window.scrollY>200){backToTop.classList.add('show');}else{backToTop.classList.remove('show');}
+});
+backToTop.addEventListener('click',()=>{window.scrollTo({top:0,behavior:'smooth'});});
+
+// دارك مود
+darkModeBtn.addEventListener('click',()=>{document.body.classList.toggle('dark');});
+
+// منيو الموبايل
+menuToggle.addEventListener('click',()=>{nav.classList.toggle('active');});
+
+// المودال وعرض البيانات
+allCards.forEach(card=>{
+  card.addEventListener('click',()=>{
+    const parts = card.dataset.original.split(" - ");
+    modalText.innerHTML = parts.map(p=>`<p>${p}</p>`).join("");
+    modalOverlay.style.display='flex';
+    const phone = parts.find(p=>p.match(/^01\d{9}$/));
+    modalCopy.dataset.number=phone||"";
+    callBtn.dataset.number=phone||"";
+  });
+});
+modalClose.addEventListener('click',()=>{modalOverlay.style.display='none';});
+modalOverlay.addEventListener('click',(e)=>{if(e.target===modalOverlay)modalOverlay.style.display='none';});
+
+// نسخ الرقم وإشعارات
+function showToast(msg){
+  toast.textContent=msg;toast.classList.add('show');
+  setTimeout(()=>{toast.classList.remove('show');},2000);
+}
+modalCopy.addEventListener('click',()=>{
+  const num=modalCopy.dataset.number;
+  if(num){navigator.clipboard.writeText(num);showToast("تم نسخ الرقم");}
+});
+function shareText(url){window.open(url,'_blank');}
+shareWhatsApp.addEventListener('click',()=>{
+  const num=modalCopy.dataset.number;
+  shareText(`https://wa.me/${num}`);
+});
+shareFacebook.addEventListener('click',()=>{
+  shareText(`https://www.facebook.com/sharer/sharer.php?u=tel:${modalCopy.dataset.number}`);
+});
+callBtn.addEventListener('click',()=>{
+  const num=callBtn.dataset.number;
+  if(num){window.location.href=`tel:${num}`;}
+});
+
+// بروتفوليو أزرار
+window.copyPortfolioNumber = ()=>{navigator.clipboard.writeText("01018813328");showToast("تم نسخ الرقم");};
+window.sharePortfolioWhats = ()=>{shareText("https://wa.me/01018813328");};
+window.sharePortfolioFB = ()=>{shareText("https://www.facebook.com/sharer/sharer.php?u=tel:01018813328");};
+});
+</script>
+</body>
+</html>
