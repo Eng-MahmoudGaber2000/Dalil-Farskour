@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/jpg" href="../img/logo.jpg">
 <title>دليل فارسكور</title>
+
 <style>
 * {margin:0;padding:0;box-sizing:border-box;font-family:'Tahoma',sans-serif;}
 body {background:#f9f9f9;color:#333;transition:0.3s;}
@@ -61,7 +62,7 @@ body.dark #modalClose {color:#fff;}
 #toast.show {opacity:1;}
 
 /* البروتفوليو */
-#portfolio {background:#ffb703;color:#000;padding:15px;border-radius:12px;display:flex;align-items:center;gap:15px;z-index:1001;box-shadow:0 2px 6px rgba(0,0,0,0.2);}
+#portfolio {background:#ffb703;color:#000;padding:15px;border-radius:12px;display:none;align-items:center;gap:15px;z-index:1001;box-shadow:0 2px 6px rgba(0,0,0,0.2);}
 #portfolio img {width:100px;height:100px;border-radius:50%;border:3px solid #fff;object-fit:cover;}
 #portfolio .info {display:flex;flex-direction:column;}
 #portfolio .info span {margin:2px 0;}
@@ -95,6 +96,7 @@ body.dark #modalClose {color:#fff;}
 </div>
 <button id="menuToggle">☰ القائمة</button>
 </header>
+<button id="showPortfolioBtn" style="margin:20px;padding:10px 15px;border:none;border-radius:8px;background:#0077b6;color:white;cursor:pointer;">اضغط هنا للتعرف على مهندس/محمود جابر الذي صنع أبلكيشن دليل فارسكور</button>
 
 <!-- بروتفوليو ثابت -->
 <div id="portfolio">
@@ -444,5 +446,13 @@ window.sharePortfolioWhats = ()=>{shareText("https://wa.me/01018813328");};
 window.sharePortfolioFB = ()=>{shareText("https://www.facebook.com/sharer/sharer.php?u=tel:01018813328");};
 });
 </script>
+<script>const showPortfolioBtn = document.getElementById('showPortfolioBtn');
+  const portfolio = document.getElementById('portfolio');
+  
+  showPortfolioBtn.addEventListener('click', () => {
+    portfolio.style.display = 'flex'; // يظهر البروتفوليو
+    showPortfolioBtn.style.display = 'none'; // نخفي الزر بعد الضغط
+  });
+  </script>
 </body>
 </html>
