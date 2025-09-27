@@ -107,6 +107,37 @@ body.dark #modalClose {color:#fff;}
   <img src="../img/ps.png" alt="فلسطين" style="width:90px; height:90px;">
 </div>
 
+
+
+<!-- 🔔 شريط الإعلانات -->
+<div class="ads-container">
+  <div class="ads-slider">
+    <!-- إعلان 1 -->
+    <div class="ad-item">
+      <!--<img src="img/ad1.jpg" alt="اعلان 1"> -->
+      <span>إعلان مميز هنا </span>
+    </div>
+
+    <!-- إعلان 2 -->
+    <div class="ad-item">
+      <!--<img src="img/ad2.jpg" alt="اعلان 2"> -->
+      <span>خصومات خاصة - تواصل معنا الآن</span>
+    </div>
+
+    <!-- إعلان 3 -->
+    <div class="ad-item">
+      <!--<img src="img/ad3.jpg" alt="اعلان 3"> -->
+      <span>احجز مكان إعلانك هنا 📢</span>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
 <!-- بروتفوليو ثابت -->
 <div id="portfolio">
 <img src="../img/info.jpg" alt="محمود جابر">
@@ -523,5 +554,58 @@ window.sharePortfolioFB = ()=>{shareText("https://www.facebook.com/sharer/sharer
     showPortfolioBtn.style.display = 'none'; // نخفي الزر بعد الضغط
   });
   </script>
+
+<!-- 🔔 شريط الإعلانات -->
+<style>
+
+.ads-container {
+  width: 100%;
+  background: #fff7e6;
+  border-top: 2px solid #ffa500;
+  border-bottom: 2px solid #ffa500;
+  overflow: hidden;
+  position: relative;
+  height: 70px;
+  display: flex;
+  align-items: center;
+}
+
+.ads-slider {
+  display: flex;
+  gap: 50px;
+  animation: scrollAds 25s linear infinite;
+}
+
+.ad-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.ad-item img {
+  height: 50px;
+  width: auto;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+@keyframes scrollAds {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+
+
+
+</style>
+
+
+
+
+
 </body>
 </html>
