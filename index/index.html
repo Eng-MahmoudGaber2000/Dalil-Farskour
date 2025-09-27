@@ -530,7 +530,7 @@ modalCopy.addEventListener('click',()=>{
 function shareText(url){window.open(url,'_blank');}
 shareWhatsApp.addEventListener('click',()=>{
   const num=modalCopy.dataset.number;
-  shareText(`https://wa.me/${num}`);
+  shareText(`https://wa.me/20${num}`);
 });
 shareFacebook.addEventListener('click',()=>{
   shareText(`https://www.facebook.com/sharer/sharer.php?u=tel:${modalCopy.dataset.number}`);
@@ -542,7 +542,7 @@ callBtn.addEventListener('click',()=>{
 
 // بروتفوليو أزرار
 window.copyPortfolioNumber = ()=>{navigator.clipboard.writeText("01018813328");showToast("تم نسخ الرقم");};
-window.sharePortfolioWhats = ()=>{shareText("https://wa.me/01018813328");};
+window.sharePortfolioWhats = ()=>{shareText("https://wa.me/+2001018813328");};
 window.sharePortfolioFB = ()=>{shareText("https://www.facebook.com/sharer/sharer.php?u=tel:01018813328");};
 });
 </script>
