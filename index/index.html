@@ -530,7 +530,7 @@ modalCopy.addEventListener('click',()=>{
 function shareText(url){window.open(url,'_blank');}
 shareWhatsApp.addEventListener('click',()=>{
   const num = modalCopy.dataset.number;
-  const message = encodeURIComponent("السلام عليكم، بتواصل معاك من أبلكيشن دليل فارسكور");
+  const message = encodeURIComponent("السلام عليكم، بتواصل مع حضرتك من أبلكيشن دليل فارسكور");
   shareText(`https://wa.me/20${num}?text=${message}`);
 });
 shareFacebook.addEventListener('click',()=>{
